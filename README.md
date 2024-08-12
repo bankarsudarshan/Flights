@@ -39,38 +39,10 @@ Let's take a look inside the 'src' folder
     PORT=3000
     ```
 
--   Inside the src/cnfig folder, create a file 'config.json' and write the following code
-
-    ```
-    {
-        "development": {
-            "username": "root",
-            "password": null,
-            "database": "database_development",
-            "host": "127.0.0.1",
-            "dialect": "postgres"
-        },
-        "test": {
-            "username": "root",
-            "password": null,
-            "database": "database_test",
-            "host": "127.0.0.1",
-            "dialect": "postgres"
-        },
-        "production": {
-            "username": "root",
-            "password": null,
-            "database": "database_production",
-            "host": "127.0.0.1",
-            "dialect": "postgres"
-        }
-    }
-    ```
-
 -   go inside the src folder and execute this command
 
     ```
-    npx sequelize cli
+    npx sequelize init
     ```
 
 -   By executing the above command you'll get the migrations, models and seeders flder along with a config.json file inside the config folder
