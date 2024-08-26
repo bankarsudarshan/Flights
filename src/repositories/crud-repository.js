@@ -1,69 +1,70 @@
-const { where } = require("sequelize");
-const { Logger } = require("../config");
+const { Logger } = require('../config');
 
 class CrudRepository {
-    constructor(model) {
-        this.model = model;
-    }
+  constructor(model) {
+    this.model = model;
+  }
 
-    async create(data) {
-        try {
-            const response = await this.model.create(data);
-            return response;
-        } catch (error) {
-            Logger.error("Something went wrong in the Crud Repo : create");
-            throw error;
-        }
+  // this method of the class CrudRepository will insert the 'data' in the table corresponding to 'model'
+  async insertTuple(data) {
+    try {
+      console.log('in crud repository:insertTuple');
+      const response = await this.model.create(data);
+      return response;
+    } catch (error) {
+      Logger.error('Something went wrong in the Crud Repo : create');
+      throw error;
     }
+  }
 
-    async destroy(data) {
-        try {
-            const response = await this.model.destroy({
-                where: {
-                    id: data,
-                },
-            });
-            return response;
-        } catch (error) {
-            Logger.error("Something went wrong in the Crud Repo : destroy");
-            throw error;
-        }
+  async deleteTuple(dataId) {
+    try {
+      const response = await this.model.destroy({
+        where: {
+          id: dataId,
+        },
+      });
+      return response;
+    } catch (error) {
+      Logger.error('Something went wrong in the Crud Repo : destroy');
+      throw error;
     }
+  }
 
-    async get(data) {
-        try {
-            const response = await this.model.findByPk(data);
-            return response;
-        } catch (error) {
-            Logger.error("Something went wrong in the Crud Repo : get");
-            throw error;
-        }
+  async getTuple(dataId) {
+    try {
+      const response = await this.model.findByPk(dataId);
+      return response;
+    } catch (error) {
+      Logger.error('Something went wrong in the Crud Repo : get');
+      throw error;
     }
+  }
 
-    async getAll(data) {
-        try {
-            const response = await this.model.findAll(data);
-            return response;
-        } catch (error) {
-            Logger.error("Something went wrong in the Crud Repo : getAll");
-            throw error;
-        }
+  async getAllTuples(dataId) {
+    try {
+      const response = await this.model.findAll(dataId);
+      return response;
+    } catch (error) {
+      Logger.error('Something went wrong in the Crud Repo : getAll');
+      throw error;
     }
+  }
 
-    async update(id, data) {
-        // data -> {col: val, ...}
-        try {
-            const response = await this.model.update(data, {
-                where: {
-                    id: id,
-                },
-            });
-            return response;
-        } catch (error) {
-            Logger.error("Something went wrong in the Crud Repo : update");
-            throw error;
-        }
+  async updateTuple(id, data) {
+    // data -> {col: val, ...}
+    try {
+      const response = await this.model.update(data, {
+        where: {
+          id: id,
+        },
+      });
+      return response;
+    } catch (error) {
+      Logger.error('Something went wrong in the Crud Repo : update');
+      throw error;
     }
+  }
 }
 
 module.exports = CrudRepository;

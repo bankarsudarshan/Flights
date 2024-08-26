@@ -1,34 +1,35 @@
-const { StatusCodes } = require("http-status-code");
-
-const { AirplaneService } = require("../services");
-const { error } = require("winston");
+const { StatusCodes } = require('http-status-codes');
+const { AirplaneService } = require('../services');
 
 /*
  * POST: /airplanes
  * req-body: {modelNumber: 'airbus360', capacity: 200}
  */
-async function createAirplane(req, res) {
-    try {
-        const airplane = await AirplaneService.createAirplane({
-            modelNumber: req.body.modelNumber,
-            capacity: req.body.capacity,
-        });
-        return res.status(StatusCodes.CREATED).json({
-            success: true,
-            message: "Successfully created an airplane",
-            // data: res
-            error: {},
-        });
-    } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
-            success: FALSE,
-            message: "Something went wrong while creating an airplane",
-            // data: res
-            error: error,
-        });
-    }
+async function airplaneControllerPOST(req, res) {
+  try {
+    console.log('in airplane controller:try');
+    const data = {
+      modelNumber: req.body.modelNumber,
+      capacity: req.body.capacity,
+    };
+    const airplane = await AirplaneService.insertAirplane(data);
+    return res.status(StatusCodes.CREATED).json({
+      success: true,
+      message: 'Successfully created an airplane',
+      data: airplane,
+      error: {},
+    });
+  } catch (err) {
+    console.log('in airplane controller:catch');
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      success: false,
+      message: 'Something went wrong while creating an airplane',
+      data: {},
+      error: err,
+    });
+  }
 }
 
 module.exports = {
-    createAirplane,
+  airplaneControllerPOST,
 };
