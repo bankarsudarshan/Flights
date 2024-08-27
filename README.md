@@ -1,4 +1,4 @@
-this is a base node js project template, which anyone can use as it has been prepared by keeping some of the most important code principles and project management reccomendations. Feel free to change anything.
+This is a base node js project template, which anyone can use as it has been prepared by keeping some of the most important code principles and project management reccomendations. Feel free to change anything.
 
 'src' -> Insode the src folder all the source code regarding the project will reside, this will not include any of the tests. (You might want to make separate tests folder)
 
