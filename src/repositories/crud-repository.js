@@ -1,6 +1,5 @@
 const { StatusCodes } = require("http-status-codes");
 const AppError = require('../utils/errors/app-error')
-const { Logger } = require("../config");
 
 class CrudRepository {
     constructor(model) {
@@ -37,15 +36,20 @@ class CrudRepository {
     async getAllTuples(dataId) {
         const response = await this.model.findAll(dataId);
         return response;
-    }
+    }      
 
     async updateTuple(id, data) {
         // data -> {col: val, ...}
         const response = await this.model.update(data, {
-            where: {
-                id: id,
-            },
+            where: { id: id, },
+            returning: true,
         });
+        console.log(response);
+        // response: [ affectedRowsCount, [array of affectedRows] ]
+        // console.log(response instanceof Array); // true
+        if(response[0] === 0) {
+            throw new AppError('Resource does not exist to update', StatusCodes.NOT_FOUND);
+        }
         return response;
     }
 }

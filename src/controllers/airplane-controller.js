@@ -70,9 +70,26 @@ async function airplaneControllerDELETE(req, res) {
     }
 }
 
+async function airplaneControllerUPDATE(req, res) {
+    try {
+        const data = new Object(req.body);
+        const response = await AirplaneService.updateAirplane(req.params.id, data);
+        SuccessResponse.data = response;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     airplaneControllerPOST,
     airplaneControllerGETAll,
     airplaneControllerGET,
     airplaneControllerDELETE,
+    airplaneControllerUPDATE,
 };

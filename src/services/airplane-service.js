@@ -56,9 +56,22 @@ async function deleteAirplane(id) {
     }
 }
 
+async function updateAirplane(id, data) { // this will update the capacity of the airplane
+    try {
+        const response = await airplaneRepository.updateTuple(id, data);
+        return response;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('Required airplane does not exist to update', error.statusCode);
+        }
+        throw new AppError('Cannot update airplane', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
     insertAirplane,
     getAirplanes,
     getAirplane,
     deleteAirplane,
+    updateAirplane,
 };
