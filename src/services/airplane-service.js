@@ -23,16 +23,29 @@ async function insertAirplane(data) {
     }
 }
 
-async function getAllAirplanes() {
+async function getAirplanes() {
     try {
         const airplanes = await airplaneRepository.getAllTuples();
         return airplanes;
     } catch(error) {
-        return new AppError('Cannot fetch all airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
+        throw new AppError('Cannot fetch all airplanes', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
+async function getAirplane(id) {
+    try {
+        const airplane = await airplaneRepository.getTuple(id);
+        return airplane;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('Required airplane not found', error.statusCode);
+        }
+        throw new AppError('Cannot get the airplane', StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
 
 module.exports = {
     insertAirplane,
-    getAllAirplanes,
+    getAirplanes,
+    getAirplane,
 };
