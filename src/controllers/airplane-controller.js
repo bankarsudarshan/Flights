@@ -8,7 +8,6 @@ const { SuccessResponse, ErrorResponse } = require("../utils/common");
  */
 async function airplaneControllerPOST(req, res) {
     try {
-        console.log(req.body);
         const data = {
             modelNumber: req.body.modelNumber,
             capacity: req.body.capacity,
