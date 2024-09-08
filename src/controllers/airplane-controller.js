@@ -27,7 +27,7 @@ async function airplaneControllerPOST(req, res) {
 
 async function airplaneControllerGETAll(req, res) {
     try {
-        const aiplanes = await AirplaneService.getAllAirplanes();
+        const aiplanes = await AirplaneService.getAirplanes();
         SuccessResponse.data = aiplanes;
         return res
                 .status(StatusCodes.OK)
@@ -55,8 +55,24 @@ async function airplaneControllerGET(req, res) {
     }
 }
 
+async function airplaneControllerDELETE(req, res) {
+    try {
+        const response = await AirplaneService.deleteAirplane(req.params.id);
+        SuccessResponse.data = response;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     airplaneControllerPOST,
     airplaneControllerGETAll,
     airplaneControllerGET,
+    airplaneControllerDELETE,
 };

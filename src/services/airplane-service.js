@@ -44,8 +44,21 @@ async function getAirplane(id) {
     }
 }
 
+async function deleteAirplane(id) {
+    try {
+        const response = await airplaneRepository.deleteTuple(id);
+        return response;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('Required airplane does not exist to delete', error.statusCode);
+        }
+        throw new AppError('Cannot delete the airplane', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
     insertAirplane,
     getAirplanes,
     getAirplane,
+    deleteAirplane,
 };
