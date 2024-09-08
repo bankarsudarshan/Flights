@@ -9,10 +9,9 @@ router.post(
     AirplaneController.airplaneControllerPOST
 );
 
-function timepass(req, res) {
-    res.send("hello world");
-}
-
-router.get("/", timepass);
+router.get(
+    "/",
+    AirplaneController.airplaneControllerGETAll
+);
 
 module.exports = router;

@@ -25,6 +25,22 @@ async function airplaneControllerPOST(req, res) {
     }
 }
 
+async function airplaneControllerGETAll(req, res) {
+    try {
+        const aiplanes = await AirplaneService.getAllAirplanes();
+        SuccessResponse.data = aiplanes;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
 module.exports = {
     airplaneControllerPOST,
+    airplaneControllerGETAll,
 };
