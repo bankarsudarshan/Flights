@@ -4,3 +4,4 @@ node_modules/
 combined.log
 src/config/config.json
 .prettierrc
+project notes.txt
