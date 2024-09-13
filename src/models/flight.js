@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
         type: DataTypes.INTEGER,
+        allowNull: false,
     },
     totalSeats: {
         type: DataTypes.INTEGER,

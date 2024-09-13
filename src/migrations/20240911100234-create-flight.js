@@ -24,20 +24,20 @@ module.exports = {
         // onUpdate: 'restrict',
       },
       departureAirport: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
             model: 'airports',
-            key: 'id',
+            key: 'code',
         },
         onDelete: 'cascade',
       },
       arrivalAirport: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         allowNull: false,
         references: {
             model: 'airports',
-            key: 'id',
+            key: 'code',
         },
         onDelete: 'cascade',
       },
@@ -50,7 +50,8 @@ module.exports = {
         allowNull: false,
       },
       price: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
       },
       totalSeats: {
         type: Sequelize.INTEGER,
