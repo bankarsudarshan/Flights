@@ -21,6 +21,19 @@ async function insertCity(data) {
     }
 }
 
+async function deleteCity(id) {
+    try {
+        const response = await cityRepository.deleteTuple(id);
+        return response;
+    } catch (error) {
+        if(error.statusCode == StatusCodes.NOT_FOUND) {
+            throw new AppError('Required airport does not exist to delete', error.statusCode);
+        }
+        throw new AppError('Cannot delete the airport', StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 module.exports = {
     insertCity,
+    deleteCity
 }

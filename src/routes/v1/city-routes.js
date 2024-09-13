@@ -15,4 +15,9 @@ router.post("/",
     CityController.cityControllerPOST
 );
 
+// /api/v1/airplanes DELETE
+router.delete("/:id",
+    CityController.cityControllerDELETE
+);
+
 module.exports = router;
