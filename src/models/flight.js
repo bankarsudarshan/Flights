@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'airplaneId',
       })
       this.belongsTo(models.airport, {
-        foreignKey: ['departureAirport', 'arrivalAirport'],
+        foreignKey: 'departureAirport',
+      })
+      this.belongsTo(models.airport, {
+        foreignKey: 'arrivalAirport',
       })
     }
   }
@@ -46,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     price: {
         type: DataTypes.INTEGER,
-        allowNull: false,
+        allowNull: false
     },
     totalSeats: {
         type: DataTypes.INTEGER,

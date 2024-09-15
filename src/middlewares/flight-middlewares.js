@@ -3,7 +3,7 @@ const { ErrorResponse } = require("../utils/common");
 const AppError = require("../utils/errors/app-error");
 
 function validateCreateRequest(req, res, next) {
-    if(req.body.name && req.body.cityId && req.body.code) {
+    if(req.body.flightId && req.body.airplaneId && req.body.departureAirport && req.body.arrivalAirport && req.body.departureTime && req.body.arrivalTime && req.body.price && req.body.totalSeats) {
         next();
     }
     else{
@@ -41,4 +41,20 @@ function validateCreateRequest(req, res, next) {
     }
 }
 
-module.exports = { validateCreateRequest };
+function validateArrivalDepartureTimes(req, res, next) {
+    const arrival = new Date(req.body.arrivalTime);
+    const departure = new Date(req.body.departureTime);
+    if(arrival>departure) {
+        next();
+    } else {
+        ErrorResponse.error = new AppError('Departure time can\'t be ahead of arrival time', StatusCodes.BAD_REQUEST);
+        return res
+                .status(StatusCodes.BAD_REQUEST)
+                .json(ErrorResponse);
+    }
+}
+
+module.exports = { 
+    validateCreateRequest,
+    validateArrivalDepartureTimes,
+};
