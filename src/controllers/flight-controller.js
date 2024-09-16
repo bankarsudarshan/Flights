@@ -21,16 +21,36 @@ async function flightControllerPOST(req, res) {
         };
 
         const flight = await FlightService.insertFlight(data);
-        SuccessResponse.message = "Successfully created an flight";
+        SuccessResponse.message = "Successfully created a flight";
         SuccessResponse.data = flight;
 
-        return res.status(StatusCodes.CREATED).json(SuccessResponse);
+        return res
+                .status(StatusCodes.CREATED)
+                .json(SuccessResponse);
     } catch (error) {
         ErrorResponse.error = error;
-        return res.status(error.statusCode).json(ErrorResponse);
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
+    }
+}
+
+async function getAllFlights(req, res) {
+    try {
+        const response = await FlightService.getAllFlights(req.query);
+        SuccessResponse.data = response;
+        return res
+                .status(StatusCodes.OK)
+                .json(SuccessResponse);
+    } catch (error) {
+        ErrorResponse.error = error;
+        return res
+                .status(error.statusCode)
+                .json(ErrorResponse);
     }
 }
 
 module.exports = {
     flightControllerPOST,
+    getAllFlights,
 };
