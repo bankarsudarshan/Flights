@@ -15,10 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'cityId',
       })
       this.hasMany(models.flight, {
-        foreignKey: 'departureAirport',
+        sourceKey: "code",
+        foreignKey: "departureAirport",
       })
       this.hasMany(models.flight, {
-        foreignKey: 'arrivalAirport',
+        sourceKey: "code",
+        foreignKey: "arrivalAirport",
       })
     }
   }
