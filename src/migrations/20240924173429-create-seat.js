@@ -27,7 +27,7 @@ module.exports = {
         allowNull: false,
       },
       col: {
-        type: Sequelize.CHAR,
+        type: Sequelize.STRING,
         allowNull: false,
       },
       class: {

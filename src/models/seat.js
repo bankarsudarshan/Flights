@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
     },
     col: {
-        type: DataTypes.CHAR,
+        type: DataTypes.STRING,
         allowNull: false,
     },
     seatType: {
